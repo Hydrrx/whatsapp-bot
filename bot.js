@@ -41,7 +41,7 @@ client.on('message', async message => {
     // Check if the sender is an admin
     const sender = message.from;
 
-    // If the sender is an admin, check for special commands
+    // Command: Admins only can open/close chat
     if (admins.includes(sender)) {
         // Command to close the chat (only admins can send messages)
         if (message.body.toLowerCase() === '!closechat') {
@@ -52,6 +52,13 @@ client.on('message', async message => {
         else if (message.body.toLowerCase() === '!openchat') {
             await chat.setMessagesAdminsOnly(false);  // Open chat to all members
             message.reply('✅ Chat is now open. Everyone can send messages.');
+        }
+        // Command to show help
+        else if (message.body.toLowerCase() === '!help') {
+            message.reply('📝 Here are the available commands:\n' +
+                '!closechat - Close chat to non-admins\n' +
+                '!openchat - Open chat to all members\n' +
+                '!help - Show this help message');
         }
     }
 
